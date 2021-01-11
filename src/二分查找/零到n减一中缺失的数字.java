@@ -12,6 +12,7 @@ package 二分查找;
 //        输入: [0,1,2,3,4,5,6,7,9]
 //        输出: 8
 public class 零到n减一中缺失的数字 {
+    //第一种
     public int missingNumber(int[] nums) {
         int left=0;
         int right=nums.length-1;
@@ -19,6 +20,22 @@ public class 零到n减一中缺失的数字 {
             int mid=left+(right-left)/2;
             if (nums[mid]>mid){
                 right=mid-1;
+            }
+            else {
+                left=mid+1;
+            }
+        }
+        return left;
+    }
+    //第二种
+    public int missingNumber2(int[] nums) {
+        int left=0;
+        //必须理解这一步
+        int right=nums.length;
+        while (left<right){
+            int mid=left+(right-left)/2;
+            if (nums[mid]>mid){
+                right=mid;
             }
             else {
                 left=mid+1;
