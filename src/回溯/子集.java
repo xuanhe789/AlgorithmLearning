@@ -41,6 +41,7 @@ public class 子集 {
         for (int i=index;i<nums.length;i++){
             list.add(nums[i]);
             dfs(nums,result,list,index+1);
+            //回溯法得关键，还原状态，避免影响下个结果
             list.remove(list.size()-1);
         }
     }
