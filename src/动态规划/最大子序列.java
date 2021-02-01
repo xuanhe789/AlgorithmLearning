@@ -16,6 +16,7 @@ package 动态规划;
 //        链接：https://leetcode-cn.com/problems/maximum-subarray
 //        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 public class 最大子序列 {
+    //动态规划
     public int maxSubArray(int[] nums) {
         if (nums.length==1){
             return nums[0];
