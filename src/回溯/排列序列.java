@@ -36,7 +36,7 @@ package 回溯;
 //        链接：https://leetcode-cn.com/problems/permutation-sequence
 //        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 public class 排列序列 {
-    int number=0;
+    int number=1;
     String result=null;
     public String getPermutation(int n, int k) {
         boolean[] used=new boolean[n+1];
@@ -46,6 +46,7 @@ public class 排列序列 {
     public void dfs(int n,int k,StringBuilder stringBuilder,boolean[] used){
         if (stringBuilder.length()==n&&number==k){
             result=stringBuilder.toString();
+            number++;
             return;
         }
         if (stringBuilder.length()==n){
