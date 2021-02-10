@@ -47,6 +47,32 @@ import java.util.Map;
 //        链接：https://leetcode-cn.com/problems/linked-list-cycle-ii
 //        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 public class 环形链表2 {
+    public ListNode detectCycleBest(ListNode head) {
+        if (head==null||head.next==null){
+            return null;
+        }
+        boolean flag=false;
+        ListNode slow=head,fast=head;
+        while (fast!=null&&fast.next!=null){
+            if (slow==fast){
+                flag=true;
+                break;
+            }
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        if (flag==false){
+            return null;
+        }
+        fast=head;
+        while (fast!=slow){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        return fast;
+
+    }
+
     public ListNode detectCycle(ListNode head) {
         if (head==null&&head.next==null){
             return head;
