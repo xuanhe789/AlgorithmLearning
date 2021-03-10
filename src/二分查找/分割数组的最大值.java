@@ -62,7 +62,6 @@ public class 分割数组的最大值 {
                 right=mid;
             }
         }
-//        int maxArray = getMaxArray(nums, m, left);
         return left;
     }
 

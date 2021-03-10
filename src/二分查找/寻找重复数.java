@@ -43,6 +43,5 @@ public class 寻找重复数 {
             }
         }
         return left;
-
     }
 }
