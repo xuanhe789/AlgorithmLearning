@@ -23,11 +23,13 @@ public class 打家劫舍2 {
     }
 
     public int dynactic(int[] nums,int start){
+        //dp[0]是等于0的，所以这个dp只能计算num.length-1个元素
         int[] dp=new int[nums.length];
         dp[0]=0;
+        //从第0个或第一个开始
         dp[1]=nums[start];
         for (int i=2;i<nums.length;i++){
-            dp[i]=Math.max(dp[i-2]+nums[i-1+start],dp[i-1]);
+            dp[i]=Math.max(dp[i-1],dp[i-2]+nums[i-1+start]);
         }
         return dp[dp.length-1];
     }

@@ -79,4 +79,21 @@ public class 岛屿数量 {
         dfs(grid,i,j+1);
         dfs(grid,i,j-1);
     }
+
+//    //使用回溯的模板做
+//    public int numIslands(char[][] grid) {
+//        if (grid.length==1&&grid[0].length==1){
+//            return grid[0][0]=='1'?1:0;
+//        }
+//        int sum=0;
+//        for (int i=0;i<grid.length;i++){
+//            for (int j=0;j<grid[0].length;j++){
+//                if (grid[i][j]=='1'){
+//                    dfs(grid,i,j);
+//                    sum++;
+//                }
+//            }
+//        }
+//        return sum;
+//    }
 }

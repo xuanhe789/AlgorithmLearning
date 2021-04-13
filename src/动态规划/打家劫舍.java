@@ -26,7 +26,7 @@ public class 打家劫舍 {
     //思路：动态规划
     //1.状态定义。dp[i]代表前i+1个中所能获取到得最大金额
     //2.因为到了第i个元素，拿了当前屋子的元素，就不能拿上个屋子的元素，所以
-    // 状态转移方程。dp[i]=Math.max(dp[i-2]+num[i],dp[i-1])
+    //状态转移方程。dp[i]=Math.max(dp[i-2]+num[i],dp[i-1])
     public int rob(int[] nums) {
         if (nums.length==0){
             return 0;

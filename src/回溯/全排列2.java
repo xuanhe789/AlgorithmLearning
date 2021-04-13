@@ -49,7 +49,7 @@ public class 全排列2 {
             }
             //重点来了,因为已经排序过了，如果当前元素和上一个元素相同，则会出现重复的结果
             //因此剪掉当前元素，当然i必须大于0，不然i-1没有意思
-            if (i>0&&nums[i]==nums[i-1]&&used[i-1]){
+            if (i>0&&nums[i]==nums[i-1]&&!used[i-1]){
                 continue;
             }
             list.add(nums[i]);

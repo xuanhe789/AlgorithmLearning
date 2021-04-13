@@ -41,7 +41,7 @@ package 动态规划;
 //        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 public class 不同路劲 {
     //动态规划：
-//    1.状态：dp[i][j]表示到达这个节点的路径数
+    //1.状态：dp[i][j]表示到达这个节点的路径数
     //2.根据题目要求，每次移动只能往下或者往右移动一步
     //到达一个节点的路劲必须是从他正上方或正左方移动过来；
     // ，因此可得，状态转移方程:
@@ -72,6 +72,27 @@ public class 不同路劲 {
                 }
             }
         }
+        //返回右下角元素
+        return dp[m-1][n-1];
+    }
+
+    //过了两个月后，上面的代码看不懂了，写的好垃圾啊，上面的代码
+    public int uniquePathsBest(int m, int n) {
+        int[][] dp=new int[m][n];
+        //初始条件
+        dp[0][0]=1;
+        for (int i=0;i<dp.length;i++){
+            dp[i][0]=1;
+        }
+        for (int i=0;i<dp[0].length;i++){
+            dp[0][i]=1;
+        }
+        for (int i=1;i<dp.length;i++){
+            for (int j=1;j<dp[0].length;j++){
+                dp[i][j]=dp[i-1][j]+dp[i][j-1];
+            }
+        }
+
         //返回右下角元素
         return dp[m-1][n-1];
     }

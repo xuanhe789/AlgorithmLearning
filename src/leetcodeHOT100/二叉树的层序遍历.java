@@ -37,7 +37,6 @@ public class 二叉树的层序遍历 {
         deque.add(root);
         while (!deque.isEmpty()){
             List<Integer> list= new ArrayList<>();
-            deque.size()
             for (int i = 0; i< deque.size(); i++){
                 TreeNode node = deque.poll();
                 list.add(node.val);

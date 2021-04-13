@@ -3,11 +3,14 @@ package 动态规划;
 public class 零一背包问题 {
     //零一背包问题原题
     public static int packageProblem(int[] weight, int[] values,int capacity){
-        if (weight.length==1){
+        if (weight.length==1&&weight[0]<capacity){
             return values[0];
         }
+        //dp[i][j]表示第i个物品，背包容量为j时，所达到的最大价值
         int[][] dp=new int[weight.length][capacity+1];
-        for (int i=0;i<capacity;i++){
+        //下面这段循环的意思是第一个物品在各个容量的背包中是否能放下
+        //相当于初始化
+        for (int i=0;i<=capacity;i++){
             if (weight[0]<=i){
                 dp[0][i]=values[0];
             }
