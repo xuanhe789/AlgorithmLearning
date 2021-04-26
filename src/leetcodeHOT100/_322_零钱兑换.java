@@ -76,7 +76,8 @@ public class _322_零钱兑换 {
         return result;
     }
 
-    //动态规划
+    //动态规划,自底向上
+    //状态转移方程:if n>=coin(coin代表硬币的面额)，dp[n]=Math.min(dp[n],dp[n-coin]+1)
     public  int coinChangeBest(int[] coins, int amount) {
         if (amount==0){
             return 0;
