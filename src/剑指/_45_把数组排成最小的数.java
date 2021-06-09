@@ -23,17 +23,52 @@ package 剑指;
 //        拼接起来的数字可能会有前导 0，最后结果不需要去掉前导 0。
 public class _45_把数组排成最小的数 {
     String result=null;
+    /*
+    * 此题求拼接起来的最小数字，本质上是一个排序问题。设数组 numsnums 中任意两数字的字符串为 xx 和 yy ，则规定 排序判断规则 为：
+
+       若拼接字符串 x + y > y + xx+y>y+x ，则 xx “大于” yy ；
+       反之，若 x + y < y + xx+y<y+x ，则 xx “小于” yy ；
+       xx “小于” yy 代表：排序完成后，数组中 xx 应在 yy 左边；“大于” 则反之。
+    * */
     public String minNumber1(int[] nums) {
         if (nums.length==1){
             return String.valueOf(nums[0]);
         }
-        result=String.valueOf(nums[0]);
-        for (int i=1;i<nums.length;i++){
-            String s1=result+nums[i];
-            String s2=nums[i]+result;
-            result=s1.compareTo(s2)<0?s1:s2;
+        String[] strs = new String[nums.length];
+        for(int i = 0; i < nums.length; i++)
+            strs[i] = String.valueOf(nums[i]);
+        quickSort(strs,0,nums.length-1);
+        StringBuilder sb = new StringBuilder();
+        for (String str : strs) {
+            sb.append(str);
         }
-        return result;
+        return sb.toString();
+    }
+
+    public void quickSort( String[] strs,int low,int high){
+        if (low>=high){
+            return;
+        }
+        String priot=strs[low];
+        int left=low;
+        int right=high;
+        while (left<right){
+            while (left<right &&(priot+strs[right]).compareTo(strs[right]+priot)<=0){
+                right--;
+            }
+            while (left<right &&(priot+strs[left]).compareTo(strs[left]+priot)>=0){
+                left++;
+            }
+            if (left<right){
+                String temp=strs[left];
+                strs[left]=strs[right];
+                strs[right]=temp;
+            }
+        }
+        strs[low]=strs[left];
+        strs[left]=priot;
+        quickSort(strs,low,left-1);
+        quickSort(strs,left+1,high);
     }
 
     //高复杂度解法，回溯法,leetCode过不了
