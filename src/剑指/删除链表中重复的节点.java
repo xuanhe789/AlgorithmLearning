@@ -1,4 +1,27 @@
 package 剑指;
+//存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除所有重复的元素，使每个元素 只出现一次 。
+//
+//        返回同样按升序排列的结果链表。
+//
+//         
+//
+//        示例 1：
+//
+//
+//        输入：head = [1,1,2]
+//        输出：[1,2]
+//        示例 2：
+//
+//
+//        输入：head = [1,1,2,3,3]
+//        输出：[1,2,3]
+//         
+//
+//        提示：
+//
+//        链表中节点数目在范围 [0, 300] 内
+//        -100 <= Node.val <= 100
+//        题目数据保证链表已经按升序排列
 
 public class 删除链表中重复的节点 {
     //三指针
@@ -30,5 +53,23 @@ public class 删除链表中重复的节点 {
             }
         }
         return first.next;
+    }
+
+    //代码优化，双指针
+    public ListNode deleteDumplication1(ListNode head){
+        if (head.next==null){
+            return head;
+        }
+        ListNode cur=head;
+        while (cur!=null&&cur.next!=null){
+            //如果当前节点与下个节点相同，则保留当前节点，找到下一个不相同的节点，修改指针指向
+            if (cur.val==cur.next.val){
+                while (cur.next!=null&&cur.next.val==cur.val){
+                    cur.next=cur.next.next;
+                }
+            }
+            cur=cur.next;
+        }
+        return head;
     }
 }

@@ -1,4 +1,7 @@
 package leetcodeHOT100;
+
+import java.util.HashMap;
+
 //知耻而后勇，知弱而图强
 //给定一个二叉树，判断其是否是一个有效的二叉搜索树。
 //

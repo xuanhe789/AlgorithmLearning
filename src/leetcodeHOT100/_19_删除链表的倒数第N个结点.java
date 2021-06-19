@@ -36,7 +36,6 @@ public class _19_删除链表的倒数第N个结点 {
         if (head.next==null&&n>1){
             return null;
         }
-        ListNode headPoint=head;
         //双指针，pre节点先移动n-1步，after就是那个要删除的节点
         ListNode pre=head,after=head;
         for (int i=0;i<n-1;i++){
@@ -55,6 +54,33 @@ public class _19_删除链表的倒数第N个结点 {
         listNode3.next=after.next;
         //如果after是头节点，说明要删除头节点，返回头节点的下个节点
         return after==head?after.next:head;
+
+    }
+    //三指针，代码优化
+    public ListNode removeNthFromEnd1(ListNode head, int n) {
+        if (head.next==null&&n>1){
+            return null;
+        }
+        //双指针，pre节点先移动n-1步，cur就是要删除的节点
+        ListNode pre=head,cur=head;
+        //定义aftrt节点执行cur的上一个节点
+        ListNode after = new ListNode(1);
+        after.next=cur;
+        for (int i=0;i<n-1;i++){
+            if (pre.next==null){
+                return null;
+            }
+            pre=pre.next;
+        }
+        while (pre.next!=null){
+            after=cur;
+            pre=pre.next;
+            cur=cur.next;
+        }
+        after.next=cur.next;
+        cur.next=null;
+        //如果cur是头节点，说明要删除头节点，返回头节点的下个节点
+        return cur==head?after.next:head;
 
     }
 }

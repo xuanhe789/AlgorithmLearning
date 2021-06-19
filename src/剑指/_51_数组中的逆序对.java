@@ -51,7 +51,6 @@ public class _51_数组中的逆序对 {
         for (int i=mid+1;i<=right;i++){
             rightArray[i-(mid+1)]=nums[i];
         }
-        new ReentrantLock().unlock();
         int l=leftArray.length-1,r=rightArray.length-1,k=right;
         while (l>=0&&r>=0){
             if (leftArray[l]>rightArray[r]){
