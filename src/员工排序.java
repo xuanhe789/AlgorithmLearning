@@ -63,4 +63,41 @@ public class 员工排序 {
             System.out.println(arr[0]);
         }
     }
+
+    //利用算法的稳定性解决
+    public void sort(int[][] arrs){
+        //先对编号排序
+        for (int i=0;i<arrs.length-1;i++){
+            for (int j=0;j<arrs.length-i-1;j++){
+                if (arrs[j][0]>arrs[j+1][0]){
+                    int[] temp=arrs[j];
+                    arrs[j]=arrs[j+1];
+                    arrs[j+1]=temp;
+                }
+            }
+        }
+
+        //对身高排序
+        for (int i=0;i<arrs.length-1;i++){
+            for (int j=0;j<arrs.length-i-1;j++){
+                if (arrs[j][1]>arrs[j+1][1]){
+                    int[] temp=arrs[j];
+                    arrs[j]=arrs[j+1];
+                    arrs[j+1]=temp;
+                }
+            }
+        }
+
+        //对性别排序
+
+        for (int i=0;i<arrs.length-1;i++){
+            for (int j=0;j<arrs.length-i-1;j++){
+                if (arrs[j][2]>arrs[j+1][2]){
+                    int[] temp=arrs[j];
+                    arrs[j]=arrs[j+1];
+                    arrs[j+1]=temp;
+                }
+            }
+        }
+    }
 }

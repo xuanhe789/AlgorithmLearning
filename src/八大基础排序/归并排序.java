@@ -39,6 +39,7 @@ public class 归并排序 {
         int i = 0, j = 0,k=L;
 //        两个排好序的数组合并，双指针指向两个数组
         while (i < leftArray.length && j < rightArray.length) {
+            //注意，这里不能写成>，否则将变成不稳定的排序算法
             if (leftArray[i] >= rightArray[j]) {
                 arrays[k]=rightArray[j];
                 j++;

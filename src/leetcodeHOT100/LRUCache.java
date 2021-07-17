@@ -77,6 +77,10 @@ public class LRUCache {
     public void moveToHead(DLinkedNode dLinkedNode){
         //获取节点的前一个节点
         DLinkedNode pre=dLinkedNode.prev;
+        //如果上一个节点是头节点，说明当前节点是第一个节点，无需移动
+        if (pre==head){
+            return;
+        }
         //获取节点的后一个节点
         DLinkedNode after=dLinkedNode.next;
         //删除当前获取节点
@@ -90,7 +94,9 @@ public class LRUCache {
         dLinkedNode.next=firstNode;
         firstNode.prev=dLinkedNode;
     }
-
+    /*
+    * 将尾部节点移除
+    * */
     public DLinkedNode removeTail(){
         DLinkedNode last=tail.prev;
         last.prev.next=tail;
@@ -98,7 +104,9 @@ public class LRUCache {
         return last;
 
     }
-
+    /*
+    * 对于新增的数据，将其插入
+    * */
     public void addToHead(DLinkedNode dLinkedNode){
         DLinkedNode first=head.next;
         head.next=dLinkedNode;

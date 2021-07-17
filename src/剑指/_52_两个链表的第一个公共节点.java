@@ -1,4 +1,7 @@
 package 剑指;
+
+import java.util.concurrent.ArrayBlockingQueue;
+
 //知耻而后勇，知弱而图强
 //输入两个链表，找出它们的第一个公共节点。
 //
@@ -22,6 +25,7 @@ package 剑指;
 //        链接：https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof
 //        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 public class _52_两个链表的第一个公共节点 {
+    //可以用双栈实现，但那个空间复杂度位O(n)，不符合题目要求
     //双指针解法，一种规律吧
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA==null||headB==null){
