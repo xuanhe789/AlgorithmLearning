@@ -25,31 +25,40 @@ import java.util.*;
 //
 //        你可以假设 k 总是有效的，在输入数组不为空的情况下，1 ≤ k ≤ 输入数组的大小。
 public class _59_I滑动窗口的最大值 {
-    //最优做法：单调队列
+    //最优做法：单调队列，队列里面的元素始终是有序的，队首最大，队尾最小
     public int[] maxSlidingWindowBest(int[] nums, int k) {
         if (k==0){
             return new int[]{};
         }
+        //队列存储值的下标，队列中的第一个元素是滑动窗口里面最大的值的下标
         Deque<Integer> deque=new LinkedList();
         int[] result=new int[nums.length-k+1];
         deque.addFirst(0);
+        //初始化第一个滑动窗口
         for (int i=0;i<k;i++){
+            //把队列中比当前元素值小的元素清除掉
             while (!deque.isEmpty()&&nums[i]>=nums[deque.peekLast()]){
                 deque.removeLast();
             }
+            //将当前元素加入队列
             deque.addLast(i);
         }
         result[0]=nums[deque.peek()];
         for (int i=k;i<nums.length;i++){
+            //如果当前元素大于队列中最大的值，说明当前元素是滑动窗口中是最大的，把队列之前的全部清除掉
             if (nums[i]>=nums[deque.peek()]){
                 deque.clear();
-            }else if (deque.peek()<i-k+1){
+            }
+            //如果队列第一个元素已不在滑动窗口中，则删掉队首元素，队列中第二个元素暂时充当最大元素
+            else if (deque.peek()<i-k+1){
                 deque.removeFirst();
             }
+            //将队列中比当前元素小的元素全部清除掉
             while (!deque.isEmpty()&&(deque.peekLast()<i-k+1||nums[i]>=nums[deque.peekLast()])){
                 deque.removeLast();
             }
             deque.addLast(i);
+            //加入结果集
             result[i-k+1]=nums[deque.peek()];
         }
         return result;
