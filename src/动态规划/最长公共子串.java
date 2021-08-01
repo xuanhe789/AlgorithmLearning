@@ -42,4 +42,33 @@ public class 最长公共子串 {
         String substring = str1.substring(index - max + 1, index + 1);
         return substring;
     }
+
+    public String LCSBetter (String str1, String str2) {
+        if (str1.length()==0||str2.length()==0){
+            return "";
+        }
+        int index=0;
+        int max=0;
+        //往后面多申请一位，dp[0][j]和dp[i][0]的值都为0
+        int[] dp=new int[str2.length()+1];
+        for (int i=1;i<=str1.length();i++){
+            for (int j=str2.length();j>=1;j--){
+                //初始化dp[j]为0
+                dp[j]=0;
+                if (str1.charAt(i-1)==str2.charAt(j-1)){
+                    dp[j]=dp[j-1]+1;
+                    if (max<dp[j]){
+                        max=dp[j];
+                        //在str1中，公共最长子串最后一个字符的索引
+                        index=i-1;
+                    }
+                }
+            }
+        }
+        if (max==0){
+            return "";
+        }
+        String substring = str1.substring(index - max + 1, index + 1);
+        return substring;
+    }
 }
