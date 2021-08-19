@@ -18,7 +18,7 @@ import java.util.List;
 //
 //        输入：target = 15
 //        输出：[[1,2,3,4,5],[4,5,6],[7,8]]
-public class _57_II和为s的连续正数序列 {
+public class  _57_II和为s的连续正数序列 {
     //滑动窗口，左窗口从1开始，右窗口从2开始
     public int[][] findContinuousSequence(int target) {
         int left=1;

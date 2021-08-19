@@ -12,11 +12,12 @@ public class 堆排序 {
     }
     //将数组从上往下建堆，i=(length-1)/2表示完全二叉树中的最后一个非叶子节点，从这里开始构建堆
     public void buildHeap(int[] arr,int length){
-        for (int i=(length-1)/2;i>=0;i--){
+        for (int i=(length/2)-1;i>=0;i--){
             heapify(arr,length-1,i);
         }
     }
 
+    //从第i个节点开始，往下和子节点比较和交换
     private void heapify(int[] a, int n, int i) {
         int maxPos = i;
         while (true){

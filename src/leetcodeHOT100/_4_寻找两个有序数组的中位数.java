@@ -55,7 +55,7 @@ public class _4_寻找两个有序数组的中位数 {
         int right=num1Length;
         //要做到分割线左边所有的数小于分割线右边所有的数，那么必须满足以下条件
         //num1[i-1]<=num2[j]&&nums[j-1]<=nums[i]
-        //下面的二分查找的意义就是：找到最后一个num1[i-1]<=num2[j]&&nums[j-1]<=nums[i]
+        //下面的二分查找的意义就是：找到最后一个num1[i-1]<=num2[j]&&nums2[j-1]<=nums1[i]
         while (left<right){
             int i=left+(right-left+1)/2;
             int j=totalLeft-i;
