@@ -56,7 +56,7 @@ public class _42_接雨水_hard {
     }
 
     //2.动态规划，用两个数组分别存储i位置左边的最高墙，和右边的最高墙
-    public int trapDO(int[] height) {
+    public int trapDP(int[] height) {
         if (height.length==0){
             return 0;
         }
@@ -85,6 +85,38 @@ public class _42_接雨水_hard {
             int min=Math.min(maxleft,maxright);
             //记录当前墙的积水量
             sum+=min-height[i];
+        }
+        return sum;
+    }
+
+    //3.双指针
+    public int trapDoublePoint(int[] height) {
+        if (height.length==0){
+            return 0;
+        }
+        int sum=0;
+        int leftMax=height[0];
+        int rightMax=height[height.length-1];
+        int left=1;
+        int right=height.length-2;
+        //当left小于等于right时，说明元素还未遍历完成
+        while (left<=right){
+            //当left及其左边的最大值小于right及其右边的最大值时，说明left这个位置左边最高的墙是相对矮的墙，可以计算left位置的积水
+            //此时只需要通过左边的墙计算left位置的积水即可，
+            if (Math.max(leftMax,height[left])<Math.max(rightMax,height[right])){
+                if (leftMax>height[left]){
+                    sum+=leftMax-height[left];
+                }
+                leftMax=Math.max(leftMax,height[left]);
+                left++;
+            }
+            else {
+                if (rightMax>height[right]){
+                    sum+=rightMax-height[right];
+                }
+                rightMax=Math.max(rightMax,height[right]);
+                right--;
+            }
         }
         return sum;
     }

@@ -1,4 +1,4 @@
-package leetcode周赛;
+package leetcode周赛.周赛255;
 //知耻而后勇，知弱而图强
 //给你一个大小为 m x n 的整数矩阵 mat 和一个整数 target 。
 //

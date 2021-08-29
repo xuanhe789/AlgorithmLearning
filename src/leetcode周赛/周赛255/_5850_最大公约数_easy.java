@@ -1,4 +1,4 @@
-package leetcode周赛;
+package leetcode周赛.周赛255;
 
 import java.util.HashSet;
 import java.util.Set;
