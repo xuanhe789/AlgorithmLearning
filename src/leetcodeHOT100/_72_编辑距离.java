@@ -49,8 +49,9 @@ public class _72_编辑距离 {
         //1.当word1的第i个字符和word2第j个字符相同时，也就是word1.charAt(i-1)==word2.charAt(j-1)
         //这时，不需要对word1的第i个字符进行任何操作，问题转化为dp[i-1][j-1]
         //2.当word1的第i个字符和word2第j个字符不相同时，word1可以执行插入，删除和修改操作，取这三个操作执行后的编辑距离的最小值
-        //插入操作：dp[i][j]可以由word1插入第i个字符得来，也就是dp[i][j-1]+1，+1代表word1插入第i个字符
+        //插入操作：dp[i][j]可以由word1插入和word2第j字符相同的字符得来，插入后，word1的第i+1个字符和word2的第j个字符相同，问题也就转化为dp[i][j-1]， 也就是dp[i][j-1]+1，+1代表word1插入第i+1个字符
         //删除操作：dp[i][j]可以由word1删除第i个字符得来，也就是dp[i-1][j]+1，+1代表word1删除第i个字符
+        //替换操作，dp[i][j]可以由word1替换第i个字符得来，将word1的第i个字符替换成word2的第j个字符，问题就转换成dp[i-1][j-1]，也就是dp[i-1][j-1]+1
         for (int i=1;i<=word1.length();i++){
             for (int j=1;j<=word2.length();j++){
                 if (word1.charAt(i-1)==word2.charAt(j-1)){
