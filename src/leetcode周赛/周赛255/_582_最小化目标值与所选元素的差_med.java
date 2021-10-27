@@ -1,4 +1,9 @@
 package leetcode周赛.周赛255;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 //知耻而后勇，知弱而图强
 //给你一个大小为 m x n 的整数矩阵 mat 和一个整数 target 。
 //
@@ -111,6 +116,104 @@ public class _582_最小化目标值与所选元素的差_med {
             }else {
                 result++;
             }
+        }
+    }
+
+    public int countValidWords(String sentence) {
+        if (sentence==null||sentence.length()==0){
+            return 0;
+        }
+        int result=0;
+        String[] words = sentence.split(" ");
+        for (String word : words) {
+            if (word.length()==0){
+                continue;
+            }
+            boolean flag=true;
+            boolean flag1=false;
+            for (int i = 0; i < word.toCharArray().length; i++) {
+                char c = word.charAt(i);
+                if (Character.isDigit(c)){
+                    flag=false;
+                    break;
+                }
+                if (c =='-'&&(i==0||i==word.toCharArray().length-1||flag1)){
+                    flag=false;
+                    break;
+                }
+                if ((c=='.'||c=='!'||c==',')&&i!=word.toCharArray().length-1){
+                    flag=false;
+                    break;
+                }
+                if(c =='-'){
+                    if(Character.isLowerCase(word.charAt(i+1))){
+                        flag1=true;
+                        continue;
+                    }
+                    flag=false;
+                    break;
+                }
+            }
+            if (flag){
+                result++;
+            }
+        }
+        return result;
+    }
+
+    public int nextBeautifulNumber(int n) {
+        if (n==0){
+            return 1;
+        }
+        int length=0;
+        int m=n;
+        while (m!=0){
+            m/=10;
+            length++;
+        }
+        //计算这个长度的整数的最大平衡数
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            sb.append(length);
+        }
+        Integer max = Integer.valueOf(sb.toString());
+        List<Integer> list = new ArrayList<>();
+        if (n>=max){
+            length++;
+            for (int i=1;i<(length+1)/2;i++){
+                dfs(i,length+1-i,i,length+1-i,length+1,new StringBuilder(),list);
+            }
+            dfs(0,length+1,0,length+1,length+1,new StringBuilder(),list);
+        }
+        else {
+            for (int i=1;i<(length+1)/2;i++){
+                dfs(i,length-i,i,length-i,length,new StringBuilder(),list);
+            }
+            list.add(max);
+        }
+        Collections.sort(list);
+        for (Integer integer : list) {
+            if (integer>n){
+                return integer;
+            }
+        }
+        return 0;
+    }
+
+    public void dfs(int small, int big, int smallNum, int bigNum,int length,StringBuilder sb,List<Integer> list){
+        if (sb.length()==length){
+            list.add(Integer.valueOf(sb.toString()));
+            return;
+        }
+        if (smallNum>0){
+            sb.append(small);
+            dfs(small,big,smallNum-1,bigNum,length,sb,list);
+            sb.deleteCharAt(sb.length()-1);
+        }
+        if (bigNum>0){
+            sb.append(big);
+            dfs(small,big,smallNum,bigNum-1,length,sb,list);
+            sb.deleteCharAt(sb.length()-1);
         }
     }
 }
