@@ -68,7 +68,7 @@ public class _301_删除无效的括号_hard {
             if (i!=start&&s.charAt(i)==s.charAt(i-1)){
                 continue;
             }
-            if (lremove>0&&s.charAt(i)=='（'){
+            if (lremove>0&&s.charAt(i)=='('){
                 //尝试去掉一个左括号
                 dfs2(s.substring(0,start)+s.substring(start+1),i,leftCount++,rightCount,lremove-1,rremove);
             }
