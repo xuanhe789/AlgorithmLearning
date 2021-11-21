@@ -57,7 +57,7 @@ public class BM {
 
     /*
     * 好后缀原则,从模式串中截取0到i的子串（i从0取到m-2），然后求子串和模式串的'公共后缀子串'
-    * suffix 数组的下标 k，表示后缀子串的长度，下标对应的数组值存储的是，在模式串中跟好后缀{u}相匹配的子串{u*}的起始下标值。
+    * suffix 数组的下标 k，表示好后缀的长度，下标对应的数组值存储的是，在模式串中跟好后缀{u}相匹配的子串{u*}的起始下标值。
     * prefix数组的下标k，表示后缀子串的长度，存储的是boolean类型，true代表长度为k的后缀子串有与之匹配的前缀子串
     * 如果存在'公共后缀子串'就表明了一定存在不同的地方存在这个'公共后缀子串'，'公共后缀子串'长度为k，因此suffix[k]=j，j为'公共后缀子串'在截取的子串中第一个字符的下标
     * 如果j为0，说明是前缀子串，因此prefix[k]=true
@@ -81,7 +81,7 @@ public class BM {
             }
         }
     }
-    //firstIndex为'好后缀'在模式串中第一个字符的下表
+    //firstIndex为'坏字符'在模式串中的下标
     private int movebyGS(int firstIndex, int patternLength, int[] suffix, boolean[] prefix){
         //计算好后缀的长度
         int length=patternLength-firstIndex-1;
