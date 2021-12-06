@@ -42,10 +42,12 @@ public class _208_实现Trie前缀树 {
 class Trie{
     Trie[] childrens;
     boolean isEnd;
+    char data;
 
-    public Trie() {
+    public Trie(char data) {
         childrens=new Trie[26];
         isEnd=false;
+        this.data=data;
     }
 
 
@@ -54,7 +56,7 @@ class Trie{
         for (char c : word.toCharArray()) {
             int index=c-'a';
             if (node.childrens[index]==null){
-                node.childrens[index]=new Trie();
+                node.childrens[index]=new Trie(c);
             }
             node=node.childrens[index];
         }
