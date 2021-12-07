@@ -48,6 +48,32 @@ public class AC{
         }
     }
 
+    /*
+    * 匹配逻辑
+    * */
+    public void match(char[] text){
+        int length=text.length;
+        ACNode p=root;
+        for (int i=0;i<length;i++){
+            char c=text[i];
+            int index=c-'a';
+            if (p.childrens[index]!=null){
+                p=p.childrens[index];
+                if (p.isEnd){
+                    int pos = i-p.length+1;
+                    System.out.println("匹配起始下标" + pos + "; 长度" + p.length);
+                }
+                continue;
+            }
+            p=p.fail;
+            while (p!=null){
+                if (p.childrens[index]!=null&&p.isEnd){
+
+                }
+            }
+        }
+    }
+
 }
 
 class ACNode {
