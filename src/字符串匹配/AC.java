@@ -53,23 +53,35 @@ public class AC{
     * */
     public void match(char[] text){
         int length=text.length;
+        //从根节点开始查找
         ACNode p=root;
         for (int i=0;i<length;i++){
             char c=text[i];
             int index=c-'a';
-            if (p.childrens[index]!=null){
-                p=p.childrens[index];
+            //1.失败指针起作用的地方，如果当前节点的子节点不匹配当前字符，则指向其fail
+            //2.然后再判断fail是否有匹配当前字符的子节点，如果不符合，则重复1
+            //如果退出了while循环，说明有两种情况：
+            // 1.p==null:搜了所有fail节点，包括root，没有与其匹配的子节点，说明没有以匹配该字符的单词存在，因此将p指向root，开启下一轮循环
+            // 2.p.childrens[index]!=null:说明存在匹配，然后p指向其对应的子节点，判断p是否是单词的结尾节点，如果不是，则q则指向指向其fail
+            //然后继续判断p.isEnd，重点：这样做是为了防止漏掉了某个以当前字符结尾的单词
+            while (p!=null&&p.childrens[index]==null){
+                p=p.fail;
+            }
+            if (p==null){
+                p=root;
+                continue;
+            }
+            p=p.childrens[index];
+            //如果p==root的话，说明已经没有以当前字符结尾的单词了，开启下一轮循环
+            while (p!=root){
+                //如果找到当前以当前字符结尾的单词，则打印起始位置和长度，然后将p指向root，开启下一轮循环
                 if (p.isEnd){
                     int pos = i-p.length+1;
                     System.out.println("匹配起始下标" + pos + "; 长度" + p.length);
+                    p=root;
+                    break;
                 }
-                continue;
-            }
-            p=p.fail;
-            while (p!=null){
-                if (p.childrens[index]!=null&&p.isEnd){
-
-                }
+                p=p.fail;
             }
         }
     }
