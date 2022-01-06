@@ -59,6 +59,33 @@ public class _1_零一背包问题 {
         return dp[capacity];
     }
 
+    /*
+    * 回溯版本,暴力枚举所有情况
+    * */
+    int result=0;
+    public int dfsFun(int[] weights, int[] values,int capacity){
+        if (weights.length==1&&weights[0]<capacity){
+            return values[0];
+        }
+        dfs(0,values,weights,capacity,0);
+        return result;
+    }
+
+    public void dfs(int i,int[] values,int[] weights,int capacity,int allvalue){
+        //递归结束条件
+        if (i==weights.length||capacity==0){
+            if (allvalue>result){
+                result=allvalue;
+            }
+            return;
+        }
+        //选择不装第i个物品
+        dfs(i+1,values,weights,capacity,allvalue);
+        if (capacity-weights[i]>=0){
+            //选择装第i个物品
+            dfs(i+1,values,weights,capacity-weights[i],allvalue+values[i]);
+        }
+    }
     public static void main(String[] args) {
         int weight[]= {2,3,4,5};
         int value[]= {3,4,5,7};

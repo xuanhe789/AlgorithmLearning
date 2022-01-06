@@ -43,7 +43,7 @@ public class 八皇后 {
         int leftup=colum-1,rightup=colum+1;
         //主键往上判断每一行
         for ( row=row-1;row>=0;row--){
-            //判断row行的colum列是否有皇后
+            //判断row行的col um列是否有皇后
             if (result[row]==colum){
                 return false;
             }
