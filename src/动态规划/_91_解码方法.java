@@ -79,6 +79,44 @@ public class _91_解码方法 {
     }
 
     /*
+     * 动态规划，优化空间复杂度，由于dp[i]只和dp[i-1]和dp[i-2]有关，因此
+     * */
+    public int numDecodingsDPBest(String s) {
+        if (s.charAt(0)=='0'){
+            return 0;
+        }
+        int prev1=1;
+        int prev2=1;
+        int now=1;
+        for (int i=1;i<s.length();i++){
+            if (s.charAt(i)=='0'){
+                Integer value = Integer.valueOf(s.charAt(i - 1)-'0');
+                if (value<3&&value>0){
+                    now=prev1;
+                    prev1=prev2;
+                    prev2=now;
+                    continue;
+                }else {
+                    return 0;
+                }
+            }
+            now=prev2;
+            if (s.charAt(i-1)=='0'){
+                prev1=prev2;
+                prev2=now;
+                continue;
+            }
+            Integer check = Integer.valueOf(s.substring(i - 1, i+1));
+            if (check<=26){
+                now+=prev1;
+            }
+            prev1=prev2;
+            prev2=now;
+        }
+        return now;
+    }
+
+    /*
      * 动态规划，这道题类似于【上台阶问题】,都是从前一个字符和前二个字符得到当前结果
      * 1.状态定义：dp[i]表示s的前i个字符可组成的组合数
      * 2.状态转移方程
@@ -96,7 +134,7 @@ public class _91_解码方法 {
         dp[1]=1;
         for (int i=2;i<dp.length;i++){
             if (s.charAt(i-1)=='0'){
-                Integer value = Integer.valueOf(s.charAt(i - 2)-'0');
+                Integer value = Integer.valueOf(s.charAt(i - 2)+"");
                 if (value<3&&value>0){
                     dp[i]=dp[i-2];
                     continue;
