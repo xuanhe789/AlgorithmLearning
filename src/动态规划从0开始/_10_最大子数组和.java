@@ -33,4 +33,48 @@ public class _10_最大子数组和 {
         }
         return max;
     }
+
+    public int getMaxLen(int[] nums) {
+        if (nums.length==1){
+            return nums[0]>0?1:0;
+        }
+        int curMin=nums[0];
+        int curMinLength=1;
+        int curMax=nums[0];
+        int curMaxLength=1;
+        int max=nums[0];
+        int maxLength=max>0?1:0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i]<0){
+                int temp=curMin;
+                curMin=curMax;
+                curMax=temp;
+                temp=curMinLength;
+                curMinLength=curMaxLength;
+                curMaxLength=temp;
+            }
+            if (curMax*nums[i]>=nums[i]){
+                curMax=curMax*nums[i];
+                curMaxLength=curMaxLength+1;
+            }else {
+                curMaxLength=1;
+                curMax=nums[i];
+            }
+
+            if (curMin*nums[i]<=nums[i]){
+                curMin=curMin*nums[i];
+                curMinLength=curMinLength+1;
+            }else {
+                curMinLength=1;
+                curMax=nums[i];
+            }
+            if (max>=curMax){
+                max=curMax;
+                if (max>0){
+                    maxLength=Math.max(curMaxLength,maxLength);
+                }
+            }
+        }
+        return curMaxLength;
+    }
 }
