@@ -50,4 +50,28 @@ public class 最长递增子序列 {
         }
         return max;
     }
+
+    /*
+    * 回溯解法，超时
+    * */
+    public int lengthOfLISDFS(int[] nums) {
+        if (nums.length==1){
+            return 1;
+        }
+        dfs(nums,0,Integer.MIN_VALUE,0);
+        return result;
+    }
+
+    int result=0;
+
+    public void dfs(int[] nums, int index, int value,int length){
+        if (result<length){
+            result=length;
+        }
+        for (int i=index;i<nums.length;i++){
+            if (nums[i]>value){
+                dfs(nums,i,nums[i],length+1);
+            }
+        }
+    }
 }

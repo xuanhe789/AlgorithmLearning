@@ -1,4 +1,8 @@
 package 动态规划;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /*问题：有一堆石头，每块石头的重量都是正整数。每次从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x ≤ y。那么粉碎的可能结果如下：
 
         如果 x 与 y 相等，那么两块石头都会被完全粉碎；
@@ -65,5 +69,29 @@ public class _3_零一背包延伸_碎石头 {
             }
         }
         return half-dp[stones.length-1][half];
+    }
+
+    public int deleteAndEarn(int[] nums) {
+        if (nums.length==1){
+            return nums[0];
+        }
+        Map<Integer,Integer> map=new HashMap<>();
+        int max=0;
+        for (int num : nums) {
+            Integer value = map.getOrDefault(num, 0);
+            map.put(num,value+1);
+            max=Math.max(max,num);
+        }
+        int[] dp=new int[max+1];
+        dp[0]=0;
+        dp[1]=map.get(1)==null?0:map.get(1);
+        for (int i=2;i<=max;i++){
+            if (map.get(i)!=null){
+                dp[i]=Math.max(dp[i-1],dp[i-2] + map.get(i)*i);
+            }else {
+                dp[i]=dp[i-1];
+            }
+        }
+        return dp[max];
     }
 }

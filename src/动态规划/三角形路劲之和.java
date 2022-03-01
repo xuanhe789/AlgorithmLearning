@@ -129,5 +129,26 @@ public class 三角形路劲之和 {
         return dp[0][0];
     }
 
-
+    /*
+    * 回溯法，超时，用写回溯单纯是为了推导动态规划
+    * */
+    public int minimumTotalDFS(List<List<Integer>> triangle) {
+        if (triangle.isEmpty()){
+            return 0;
+        }
+        dfs(0,0,0,triangle);
+        return result;
+    }
+    int result=Integer.MAX_VALUE;
+    public void dfs(int depth,int colum,int value ,List<List<Integer>> triangle){
+        if (depth==triangle.size()){
+            if (result>value){
+                result=value;
+            }
+            return;
+        }
+        List<Integer> list = triangle.get(depth);
+        dfs(depth+1,colum,list.get(colum)+value,triangle);
+        dfs(depth+1,colum+1,list.get(colum)+value,triangle);
+    }
 }

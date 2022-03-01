@@ -49,5 +49,37 @@ public class _85_最大矩形 {
         return max;
     }
 
+    public void deleteNode(ListNode node) {
+        ListNode first=node;
+        ListNode cur=first;
+        while (cur.next!=null){
+            cur.val=cur.next.val;
+            if (cur.next.next==null){
+                cur.next=null;
+                break;
+            }
+            cur=cur.next;
+        }
+    }
+
+    public boolean isPerfectSquare(int num) {
+        if (num==1){
+            return true;
+        }
+        int left=1;
+        int right=num;
+        while (left<right){
+            int mid = left+(right-left)/2;
+            int number=num/mid;
+            if (number==mid){
+                return true;
+            }else if (number>mid){
+                right=mid;
+            }else {
+                left=mid+1;
+            }
+        }
+        return left*left==num;
+    }
 
 }

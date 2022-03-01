@@ -45,4 +45,67 @@ public class _2_完全背包问题 {
 
         return dp[capacity];
     }
+
+    public int coinChange(int[] coins, int amount) {
+        if(amount==0){
+            return 0;
+        }
+        int dp[][]=new int[coins.length][amount+1];
+        //初始化
+        for (int i=1;i<=amount;i++){
+            if (i>=coins[0]&&dp[0][i-coins[0]]!=-1){
+                dp[0][i]=dp[0][i-coins[0]]+1;
+            }else{
+                dp[0][i]=-1;
+            }
+        }
+
+        for(int i=1;i<coins.length;i++){
+            for (int j=1;j<=amount;j++){
+                //默认为不选的情况
+                dp[i][j]=dp[i-1][j];
+                if (coins[i]<=j){
+                    //在选取当前硬币若干个，或者不选取当前硬币之间做抉择
+                    if (dp[i-1][j]!=-1&&dp[i][j-coins[i]]!=-1) {
+                        dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - coins[i]] + 1);
+                    }else if (dp[i][j - coins[i]]!=-1){
+                        dp[i][j]=dp[i][j - coins[i]] + 1;
+                    }
+                }
+            }
+        }
+        return dp[coins.length-1][amount]==0?-1:dp[coins.length-1][amount];
+    }
+
+    /*
+    * 空间优化
+    * */
+    public int coinChangeBetter(int[] coins, int amount) {
+        if(amount==0){
+            return 0;
+        }
+        int dp[]=new int[amount+1];
+        //初始化
+        for (int i=1;i<=amount;i++){
+            if (i>=coins[0]&&dp[i-coins[0]]!=-1){
+                dp[i]=dp[i-coins[0]]+1;
+            }else {
+                dp[i]=-1;
+            }
+        }
+
+        for(int i=1;i<coins.length;i++){
+            for (int j=1;j<=amount;j++){
+                if (coins[i]<=j){
+                    //在选取当前硬币若干个，或者不选取当前硬币之间做抉择
+                    if (dp[j]!=-1&&dp[j-coins[i]]!=-1) {
+                        dp[j] = Math.min(dp[j], dp[j - coins[i]] + 1);
+                    }else if (dp[j - coins[i]]!=-1){
+                        dp[j]=dp[j - coins[i]] + 1;
+                    }
+                }
+            }
+        }
+        return dp[amount]==0?-1:dp[amount];
+    }
 }
